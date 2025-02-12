@@ -2,15 +2,16 @@ import logging
 import os
 from datetime import datetime
 
+# Create the artifacts directory if it doesn't exist
+log_dir = "artifacts"
+os.makedirs(log_dir, exist_ok=True)
 
-LOG_FILE=f"{datetime.now().strftime('%m_%d_%Y_%H_%M_%S')}.log"
-logs_path=os.path.join(os.getcwd(),"logs",LOG_FILE)
-os.makedirs(logs_path,exist_ok=True)
+# Define log file name with timestamp
+log_file = os.path.join(log_dir, f"log_{datetime.now().strftime('%Y-%m-%d')}.log")
 
-LOG_FILE_PATH=os.path.join(logs_path,LOG_FILE)
-
+# Configure logging
 logging.basicConfig(
-    file_name=LOG_FILE_PATH,
-    format="[%(asctime)s] %(lineno)d %(name)s -%(levelname)s -%(message)s",
-    level=logging.INFO
+    filename=log_file,
+    level=logging.INFO,
+    format="%(asctime)s - %(levelname)s - %(message)s",
 )
